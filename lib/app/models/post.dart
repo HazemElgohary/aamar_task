@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class PostModel extends Equatable {
+  static const tableName = 'posts';
   final int userId;
   final int id;
   final String title;
@@ -22,6 +23,15 @@ class PostModel extends Equatable {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "userId": userId,
+      "title": title,
+      "body": body,
+    };
+  }
+
   @override
   List<Object?> get props => [
         userId,
@@ -29,4 +39,12 @@ class PostModel extends Equatable {
         title,
         body,
       ];
+
+  static const createStatement = """  CREATE TABLE "posts" (
+                      "id"	INTEGER,
+                      "userId"	INTEGER,
+                      "title"	VARCHAR,
+                      "body"	VARCHAR,
+                      PRIMARY KEY("id")
+                      );""";
 }

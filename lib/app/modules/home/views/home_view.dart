@@ -32,30 +32,37 @@ class HomeView extends GetView<HomeController> {
                       itemCount: 10,
                     )
                   : controller.error.value.isNotEmpty
-                      ? Center(
+                      ? const Center(
                           child: Text(
-                            controller.error.value,
+                            // controller.error.value,
+                            'some thing went wrong',
                           ),
                         )
                       : controller.viewedPosts.isEmpty
                           ? const Center(
                               child: Text(
-                                'empty',
+                                'there are no posts',
                               ),
                             )
-                          :  RefreshIndicator(
-                                  onRefresh: controller.getAll,
-                                  child: ListView.builder(
-                                    itemCount: controller.viewedPosts.length,
-                                    itemBuilder: (context, index) => PostItem(
-                                      post: controller.viewedPosts[index],
-                                      onTap: () => Get.toNamed(
-                                        Routes.POST_DETAILS,
-                                        arguments: controller.viewedPosts[index],
-                                      ),
+                          : RefreshIndicator(
+                              onRefresh: controller.getAll,
+                              child: ListView.builder(
+                                itemCount: controller.viewedPosts.length,
+                                itemBuilder: (context, index) => Obx(
+                                  () => PostItem(
+                                    post: controller.viewedPosts[index],
+                                    onTap: () => Get.toNamed(
+                                      Routes.POST_DETAILS,
+                                      arguments: controller.viewedPosts[index],
+                                    ),
+                                    onFavorite: controller.toggleFavorite,
+                                    favorite: controller.favoritePosts.contains(
+                                      controller.viewedPosts[index],
                                     ),
                                   ),
                                 ),
+                              ),
+                            ),
             ),
           ),
         ],

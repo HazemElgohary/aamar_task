@@ -11,6 +11,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'helpers/api.dart';
 import 'helpers/end_points.dart';
+import 'service/offline/databse/db.dart';
+import 'service/offline/favorite_posts.dart';
 import 'service/posts.dart';
 
 
@@ -48,6 +50,12 @@ Future<void> inject() async {
   Get.put(DioWrapper(dio), permanent: true);
 
 
-  /// services
+  /// * Offline Database
+  final db = await DatabaseServices.boot();
+
+
+  /// services offline
+  Get.put(FavoritePostsService(db),);
+  /// services online
   Get.put(PostService(dio),);
 }
