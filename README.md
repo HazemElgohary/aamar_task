@@ -37,8 +37,8 @@ flutter run
 Decisions Made During Development During the development of this project, the following decisions
 were made:
 
-1. State Management: The BLoC (Business Logic Component) pattern was chosen for state management. It
-   provides a clear separation of concerns and allows for better code organization.
+1. State Management: The GetX package was chosen for state management. It provides a simple and
+   lightweight solution for managing state in Flutter applications.
 2. API Integration: The JSONPlaceholder API was used to fetch the list of posts. It provides a
    simple and easy-to-use API for testing purposes.
 3. Search Functionality: A local search feature was implemented to filter the displayed posts by
